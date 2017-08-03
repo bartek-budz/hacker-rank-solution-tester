@@ -1,4 +1,4 @@
-package com.bb.hackerRank.solutionTester;
+package com.bb.hackerRank.solutionTester.solutions;
 
 import java.util.Scanner;
 

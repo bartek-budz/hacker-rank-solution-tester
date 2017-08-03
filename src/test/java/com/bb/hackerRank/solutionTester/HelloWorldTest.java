@@ -1,5 +1,6 @@
 package com.bb.hackerRank.solutionTester;
 
+import com.bb.hackerRank.solutionTester.solutions.HelloWorldSolution;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

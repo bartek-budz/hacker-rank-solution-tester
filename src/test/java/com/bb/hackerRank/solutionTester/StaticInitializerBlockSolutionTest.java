@@ -1,5 +1,6 @@
 package com.bb.hackerRank.solutionTester;
 
+import com.bb.hackerRank.solutionTester.solutions.StaticInitializerBlockSolution;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -20,5 +21,4 @@ class StaticInitializerBlockSolutionTest {
         String actual = new HackerRankSolutionTester(StaticInitializerBlockSolution.class).testMain(input);
         assertEquals(expected, actual);
     }
-
 }

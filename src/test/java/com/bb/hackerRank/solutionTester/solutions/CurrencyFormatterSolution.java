@@ -1,4 +1,4 @@
-package com.bb.hackerRank.solutionTester;
+package com.bb.hackerRank.solutionTester.solutions;
 
 import java.io.InputStream;
 import java.text.NumberFormat;
