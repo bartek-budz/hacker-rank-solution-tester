@@ -14,11 +14,12 @@ public class HackerRankSolutionTester {
     private static final boolean NORMALIZE_LINE_SEPARATORS_BY_DEFAULT = true;
     private static final boolean TRIM_OUTPUT_BY_DEFAULT = true;
 
-    private Class solution;
+    private Class<?> solution;
+    private ClassReloader classReloader = new ClassReloader();
     private boolean normalizeLineSeparators = NORMALIZE_LINE_SEPARATORS_BY_DEFAULT;
     private boolean trimOutput = TRIM_OUTPUT_BY_DEFAULT;
 
-    public HackerRankSolutionTester(Class solution) {
+    public HackerRankSolutionTester(Class<?> solution) {
         this.solution = solution;
     }
 
@@ -65,7 +66,7 @@ public class HackerRankSolutionTester {
 
     private Object invokeMain(String[] args) {
         try {
-            Method main = solution.getMethod(MAIN_METHOD, String[].class);
+            Method main = classReloader.reloadClass(solution).getMethod(MAIN_METHOD, String[].class);
             return main.invoke(null, (Object) args);
         } catch (NoSuchMethodException | IllegalAccessException e) {
             throw new UnsupportedOperationException(e);
