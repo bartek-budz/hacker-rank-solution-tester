@@ -11,24 +11,13 @@ import java.lang.reflect.UndeclaredThrowableException;
 public class HackerRankSolutionTester {
     private static final String MAIN_METHOD = "main";
     private static final String[] NO_ARGUMENTS = {};
-    private static final boolean NORMALIZE_LINE_SEPARATORS_BY_DEFAULT = true;
-    private static final boolean TRIM_OUTPUT_BY_DEFAULT = true;
 
     private Class<?> solution;
     private ClassReloader classReloader = new ClassReloader();
-    private boolean normalizeLineSeparators = NORMALIZE_LINE_SEPARATORS_BY_DEFAULT;
-    private boolean trimOutput = TRIM_OUTPUT_BY_DEFAULT;
+    private OutputCleaner outputCleaner = new OutputCleaner();
 
     public HackerRankSolutionTester(Class<?> solution) {
         this.solution = solution;
-    }
-
-    public void setTrimOutput(boolean value) {
-        this.trimOutput = value;
-    }
-
-    public void setNormalizeLineSeparators(boolean normalizeLineSeparators) {
-        this.normalizeLineSeparators = normalizeLineSeparators;
     }
 
     /**
@@ -49,7 +38,7 @@ public class HackerRankSolutionTester {
         try {
             OutputStream out = setCustomIO(input);
             invokeMain(args);
-            return getSystemOutput(out);
+            return outputCleaner.cleanOutput(out);
         }
         finally {
             restoreSystemIO();
@@ -77,15 +66,24 @@ public class HackerRankSolutionTester {
         }
     }
 
-    private String getSystemOutput(OutputStream out) {
-        String output = out.toString();
-        if(normalizeLineSeparators) output = output.replaceAll("\\r\\n?", "\n");
-        if(trimOutput) output = output.trim();
-        return output;
-    }
-
     private void restoreSystemIO() {
         System.setIn(System.in);
         System.setOut(System.out);
+    }
+
+    public ClassReloader getClassReloader() {
+        return classReloader;
+    }
+
+    public void setClassReloader(ClassReloader classReloader) {
+        this.classReloader = classReloader;
+    }
+
+    public OutputCleaner getOutputCleaner() {
+        return outputCleaner;
+    }
+
+    public void setOutputCleaner(OutputCleaner outputCleaner) {
+        this.outputCleaner = outputCleaner;
     }
 }

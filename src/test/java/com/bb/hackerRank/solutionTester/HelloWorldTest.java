@@ -20,7 +20,7 @@ class HelloWorldTest {
     @Test
     void shouldFailAssertionDueToNewLineAtTheEnd() {
         HackerRankSolutionTester tester = new HackerRankSolutionTester(HelloWorldSolution.class);
-        tester.setTrimOutput(false);
+        tester.getOutputCleaner().setTrimOutput(false);
         String actualOutput = tester.testMain(HELLO_WORLD_INPUT);
         assertNotEquals(HELLO_WORLD_EXPECTED_OUTPUT, actualOutput);
     }
@@ -29,7 +29,7 @@ class HelloWorldTest {
     void shouldFailAssertionDueToDiffInLineSeparators() {
         final String LINE_SEPARATOR_PROPERTY = "line.separator";
         HackerRankSolutionTester tester = new HackerRankSolutionTester(HelloWorldSolution.class);
-        tester.setNormalizeLineSeparators(false);
+        tester.getOutputCleaner().setNormalizeLineSeparators(false);
         String lineSeparatorBackup = System.lineSeparator();
         try {
             System.setProperty(LINE_SEPARATOR_PROPERTY, "\r\n");
